@@ -7,6 +7,7 @@ class window.HandView extends Backbone.View
 
   initialize: ->
     @collection.on 'add remove change', => @render()
+    #@collection.on 'ended', -> console.log window.AppView #.template #.set _.template, '<button class = "newGame-button">New Game</button><div class="player-hand-container"></div><div class="dealer-hand-container"></div>'
     @render()
 
   render: ->

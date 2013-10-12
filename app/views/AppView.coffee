@@ -15,9 +15,7 @@ class window.AppView extends Backbone.View
 
   initialize: ->
     @render()
-
     @model.on('lost', => @lost())
-
     @model.on('won', => @won())
 
   lost: ->

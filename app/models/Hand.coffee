@@ -8,10 +8,6 @@ class window.Hand extends Backbone.Collection
 
   stay: -> @trigger('stay', @)
 
-  flip: ->
-    console.log 'flipping'
-    @model.flip()
-
   hiddenCard: -> @first().get('value')
 
   scores: ->

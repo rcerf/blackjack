@@ -16,8 +16,19 @@ class window.AppView extends Backbone.View
   initialize: ->
     @render()
 
-    @model.on('lost', => @$el.prepend '<div class = "loser">You Lose</div>')
-    @model.on('won', => @$el.prepend '<div class = "winner">You Win</div>')
+    @model.on('lost', => @lost())
+
+    @model.on('won', => @won())
+
+  lost: ->
+    @$el.prepend '<div class = "loser">You Lose</div>'
+    $('.hit-button').remove()
+    $('.stay-button').remove()
+
+  won: ->
+    @$el.prepend '<div class = "winner">You Win</div>'
+    $('.hit-button').remove()
+    $('.stay-button').remove()
 
   render: ->
     @$el.children().detach()

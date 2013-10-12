@@ -26,8 +26,10 @@ class window.AppView extends Backbone.View
 
   initialize: ->
     @render()
-    @model.get('playerHand').on('lost', => @$el.html @lostGameTemplate())
-    @model.get('playerHand').on('won', => @$el.html @wonGameTemplate())
+
+    #TODO: fix this
+    @model.on('lost', => @$el.html @lostGameTemplate())
+    @model.on('won', => @$el.html @wonGameTemplate())
 
   render: ->
     @$el.children().detach()

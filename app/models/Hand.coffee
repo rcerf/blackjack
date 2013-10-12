@@ -9,8 +9,11 @@ class window.Hand extends Backbone.Collection
 
   dealer: -> while @scores() < 15 then @hit()
 
+
   stay: ->
+    @trigger('stay', @)
     if @isDealer then @dealer()
+
 
   scores: ->
     # The scores are an array of potential scores.

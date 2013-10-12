@@ -6,7 +6,6 @@ class window.App extends Backbone.Model
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
     @get('playerHand').on('add', => @hits())
-    @get('dealerHand').on('add', => @hits())
     @get('playerHand').on('stay', => @dealerPlays())
 
 
@@ -19,22 +18,21 @@ class window.App extends Backbone.Model
   hits: ->
     console.log "hits"
     playerScore = @get('playerHand').scores()
-    dealerScore = @get('dealerHand').scores()
+    dealerScore = +@get('dealerHand').scores() + +@get('dealerHand').hiddenCard()
     if playerScore > 21 then @playerLoses()
-    if dealerScore > 21 then @playerWins()
 
   dealerStays: ->
-    console.log "delaerStays"
+    console.log "dealerStays"
     @get('dealerHand').first().flip()
     playerScore = @get('playerHand').scores()
     dealerScore = @get('dealerHand').scores()
-    if dealerScore >= playerScore and dealerScore < 22 then @playerLoses()
-    else if playerScore > dealerScore and playerScore < 22 then @playerWins()
+    if dealerScore < 22 and dealerScore >= playerScore then @playerLoses()
+    else @playerWins()
 
   dealerPlays: ->
-    console.log "dealerPlays"
-    playerScore = @get('playerHand').scores()
-    dealerScore = @get('dealerHand').scores()
+    playerScore = +@get('playerHand').scores()
+    dealerScore = +@get('dealerHand').scores() + +@get('dealerHand').hiddenCard()
+    console.log dealerScore
     if dealerScore < 15 or dealerScore < playerScore
       @get('dealerHand').hit()
       @dealerPlays()

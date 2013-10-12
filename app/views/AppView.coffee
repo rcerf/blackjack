@@ -6,16 +6,6 @@ class window.AppView extends Backbone.View
     <div class="dealer-hand-container"></div>
   '
 
-  # lostGameTemplate: _.template '
-  #   <button class = "newGame-button">New Game</button>
-  #     <div class = "lost"> You lost, sucka! </div>
-  #   '
-
-  # wonGameTemplate: _.template '
-  #   <button class = "newGame-button">New Game</button>
-  #     <div class = "won"> You won!!!!! </div>
-  #   '
-
   events:
     "click .hit-button": -> @model.get('playerHand').hit()
     "click .stay-button": -> @model.get('playerHand').stay()
@@ -26,8 +16,8 @@ class window.AppView extends Backbone.View
   initialize: ->
     @render()
 
-    @model.on('lost', => alert 'You lost') #$('.hit-button').clear() + 
-    @model.on('won', => alert 'You win!') #$('.hit-button').clear() + )
+    @model.on('lost', => @$el.prepend '<div class = "loser">You Lose</div>')
+    @model.on('won', => @$el.prepend '<div class = "winner">You Win</div>')
 
   render: ->
     @$el.children().detach()

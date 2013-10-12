@@ -8,6 +8,10 @@ class window.Hand extends Backbone.Collection
 
   stay: -> @trigger('stay', @)
 
+  flip: -> 
+    console.log 'flipping'
+    @model.flip()
+
   scores: ->
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.

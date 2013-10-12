@@ -6,20 +6,19 @@ class window.AppView extends Backbone.View
     <div class="dealer-hand-container"></div>
   '
 
-  lostGameTemplate: _.template '
-    <button class = "newGame-button">New Game</button>
-      <div class = "lost"> You lost, sucka! </div>
-    '
+  # lostGameTemplate: _.template '
+  #   <button class = "newGame-button">New Game</button>
+  #     <div class = "lost"> You lost, sucka! </div>
+  #   '
 
-  wonGameTemplate: _.template '
-    <button class = "newGame-button">New Game</button>
-      <div class = "won"> You won!!!!! </div>
-    '
+  # wonGameTemplate: _.template '
+  #   <button class = "newGame-button">New Game</button>
+  #     <div class = "won"> You won!!!!! </div>
+  #   '
 
   events:
     "click .hit-button": -> @model.get('playerHand').hit()
     "click .stay-button": -> @model.get('playerHand').stay()
-    "click .stay-button": -> @model.get('dealerHand').stay()
     "click .newGame-button": ->
       $('body').text('')
       new AppView(model: new App).$el.appendTo 'body'
@@ -27,9 +26,8 @@ class window.AppView extends Backbone.View
   initialize: ->
     @render()
 
-    #TODO: fix this
-    @model.on('lost', => @$el.html @lostGameTemplate())
-    @model.on('won', => @$el.html @wonGameTemplate())
+    @model.on('lost', => alert 'You lost') #$('.hit-button').clear() + 
+    @model.on('won', => alert 'You win!') #$('.hit-button').clear() + )
 
   render: ->
     @$el.children().detach()

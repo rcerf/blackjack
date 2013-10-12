@@ -6,6 +6,10 @@ class window.Hand extends Backbone.Collection
 
   hit: -> @add(@deck.pop()).last()
 
+  gameLost: -> @trigger 'ended', @; return ["You Lose"]
+
+  gameWon: ->  @trigger 'ended', @; return ["You Win!"]
+
   scores: ->
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
@@ -16,4 +20,4 @@ class window.Hand extends Backbone.Collection
     score = @reduce (score, card) ->
       score + if card.get 'revealed' then card.get 'value' else 0
     , 0
-    if hasAce and score < 11 then [score + 10] else if score > 21 then trigger -> alert "you lose"else [score]
+    if hasAce and score < 11 then [score + 10] else if score == 21 then @gameWon() else if score > 21 then @gameLost() else [score]
